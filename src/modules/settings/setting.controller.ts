@@ -54,7 +54,7 @@ export async function updateSetting(req: AuthRequest, res: Response, next: NextF
   try {
     const { key } = req.params;
     const { value } = req.body;
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
 
     const setting = await settingService.updateSetting(key, { value }, userId);
     sendSuccess(res, setting, "Setting updated successfully");
@@ -67,7 +67,7 @@ export async function updateSetting(req: AuthRequest, res: Response, next: NextF
 export async function updateMultiple(req: AuthRequest, res: Response, next: NextFunction) {
   try {
     const updates = req.body;
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
 
     const settings = await settingService.updateMultipleSettings(updates, userId);
     sendSuccess(res, settings, "Settings updated successfully");
@@ -89,7 +89,7 @@ export async function getStoreSettings(req: Request, res: Response, next: NextFu
 
 export async function updateStoreSettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateStoreSettings(req.body, userId);
     sendSuccess(res, settings, "Store settings updated successfully");
   } catch (error) {
@@ -110,7 +110,7 @@ export async function getTaxSettings(req: Request, res: Response, next: NextFunc
 
 export async function updateTaxSettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateTaxSettings(req.body, userId);
     sendSuccess(res, settings, "Tax settings updated successfully");
   } catch (error) {
@@ -131,7 +131,7 @@ export async function getLoyaltySettings(req: Request, res: Response, next: Next
 
 export async function updateLoyaltySettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateLoyaltySettings(req.body, userId);
     sendSuccess(res, settings, "Loyalty settings updated successfully");
   } catch (error) {
@@ -152,7 +152,7 @@ export async function getReceiptSettings(req: Request, res: Response, next: Next
 
 export async function updateReceiptSettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateReceiptSettings(req.body, userId);
     sendSuccess(res, settings, "Receipt settings updated successfully");
   } catch (error) {
@@ -173,7 +173,7 @@ export async function getSecuritySettings(req: Request, res: Response, next: Nex
 
 export async function updateSecuritySettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateSecuritySettings(req.body, userId);
     sendSuccess(res, settings, "Security settings updated successfully");
   } catch (error) {
@@ -194,7 +194,7 @@ export async function getAuthorizationSettings(req: Request, res: Response, next
 
 export async function updateAuthorizationSettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateAuthorizationSettings(req.body, userId);
     sendSuccess(res, settings, "Authorization settings updated successfully");
   } catch (error) {
@@ -215,7 +215,7 @@ export async function getDiscountLimitsSettings(req: Request, res: Response, nex
 
 export async function updateDiscountLimitsSettings(req: AuthRequest, res: Response, next: NextFunction) {
   try {
-    const userId = req.user!.id;
+    const userId = req.user!.userId;
     const settings = await settingService.updateDiscountLimitsSettings(req.body, userId);
     sendSuccess(res, settings, "Discount limits updated successfully");
   } catch (error) {
