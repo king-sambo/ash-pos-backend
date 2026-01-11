@@ -1,0 +1,54 @@
+# ================================
+# ASH LETRATO POS - Backend
+# Standalone Docker Compose
+# ================================
+
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: pos-backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3001:3001"
+    networks:
+      - pos-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Development mode with hot reload
+  backend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: pos-backend-dev
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - pos-network
+    profiles:
+      - dev
+
+networks:
+  pos-network:
+    driver: bridge
+
