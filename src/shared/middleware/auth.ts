@@ -16,6 +16,13 @@ export interface AuthPayload {
   role: string;
   roleId: string;
   permissions: string[];
+  canAuthorizeVoid?: boolean;
+  canAuthorizeRefund?: boolean;
+}
+
+// Type alias for Express Request with user property
+export interface AuthRequest extends Request {
+  user?: AuthPayload;
 }
 
 declare global {
